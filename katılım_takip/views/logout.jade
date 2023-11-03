@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  p mainpage
+
+  script.
+    localStorage.removeItem('token');
+    window.location.href = '/login'

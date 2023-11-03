@@ -1,0 +1,70 @@
+extends layout
+
+block content
+        
+  div.center_div
+    p(style="font-size: 50px") Enter New Course
+    form(action="/courses/add", method="POST")
+      input(type="hidden", name="user_id", value=user_id)
+      input(type="hidden", name="token", value=token)
+      
+
+      label(for="course_name" style="font-size: 40px" ) Course Name:
+      input(type="text", name="course_name", required="true",maxlength="15")
+      br
+      label(for="attended_days" style="font-size: 40px") Attended Days:
+      input(type="number", name="attended_days", min="0", value="0")
+      br
+      label(for="total_days" style="font-size: 40px") Total Days:
+      input(type="number", name="total_days", min="0", value="0")
+      br
+      br
+      button(type="submit") Add
+
+    
+    .course-details
+      br
+      br
+      if course_names.length === 0
+        p(style="font-size: 50px") You don't have any course 
+        
+
+      else
+        p(style="font-size: 50px") Your Courses
+          each course, index in course_names
+            form(action="/courses/delete", method="POST" style="display: inline;")
+              input(type="hidden", name="user_id", value=user_id)
+              input(type="hidden", name="token", value=token)
+              input(type="hidden", name="deleted_course", value=course)
+
+              button(type="submit" style="position:absolute; width: 60px; margin-left: 230px; align-items: center") x
+            div.course-div
+              span.course-info
+                strong(style="font-size: 50px") #{course}:
+                span.attended-days(style="font-size: 50px") #{attended_days[index]}
+                span.divider(style="font-size: 50px") /
+                span.total-days(style="font-size: 50px") #{total_days[index]}
+                
+              form(action="/courses/daily", method="POST")
+                input(type="hidden", name="user_id", value=user_id)
+                input(type="hidden", name="token", value=token)
+                input(type="hidden", name="daily_course", value=course)
+                div.checkbox-container
+                  input(type="checkbox", name="checkbox", value=course)
+                  button(type="submit") joined
+              
+            br
+            br
+            br
+    br
+    br
+    form(action="/courses/logout", method="POST")
+      button(type="submit") Logout
+
+    script.
+      console.log('created token:', '#{token}')
+      localStorage.setItem('token', '#{token}');
+      
+
+    
+        

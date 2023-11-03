@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  div.center_div
+    p(style="font-size: 50px") ITU ATTENDANCE TRACKER
+    br
+    img(src='https://i.ibb.co/pwkwYK6/logo.jpg' alt='login' style='width:300px; height:300px;')
+
+    form(action="/login", method="POST")
+      br
+      label(for="username" style="font-size: 50px") Username
+      br
+      input(type="text", name="username")
+      br
+      label(for="password" style="font-size: 50px") Password
+      br
+      input(type="password", name="password")
+      br
+      br
+      button(type="submit") Login
+
+    p(style="font-family: Serif; font-size:40px") Don't you have an account?
+    a(href="/signup")
+       button(type="submit") Signup

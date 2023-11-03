@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  p mainpage
+
+  script.
+    var token = localStorage.getItem('token');
+
+    if (token){
+      window.location.href = '/tokenChecker?token=' + encodeURIComponent(token);
+    }
+    else{
+      window.location.href = '/login'
+    }
